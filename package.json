@@ -23,6 +23,7 @@
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "dependencies": {
+    "@antv/g6": "^4.8.22",
     "@babel/core": "^7.22.20",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
