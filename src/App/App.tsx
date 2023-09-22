@@ -8,8 +8,9 @@ function App() {
   return (
     <div className={Style.App}>
       <Routes>
-        <Route path="/" element={<Show/>} />
-        <Route path="/home" element={<Show/>} />
+        <Route path="/circle" element={<Show/>} />
+        <Route path="/tree" element={<Show tree={true}/>} />
+        <Route path="/" element={<Show tree={true}/>} />
       </Routes>
     </div>
   )
