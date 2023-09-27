@@ -7,6 +7,31 @@ import {NodeConfig} from "@antv/g6-core/lib/types";
 
 let SHOW_COMPONENT_EFFECT_TIMES = 0
 
+const colors = [
+    '#c5d3f0',
+    '#c5f0de',
+    '#C2C8D5',
+    '#FBE5A2',
+    '#F6C3B7',
+    '#B6E3F5',
+    '#D3C6EA',
+    '#FFD8B8',
+    '#AAD8D8',
+    '#FFD6E7',
+];
+const strokes = [
+    '#5B8FF9',
+    '#5AD8A6',
+    '#5D7092',
+    '#F6BD16',
+    '#E8684A',
+    '#6DC8EC',
+    '#9270CA',
+    '#FF9D4D',
+    '#269A99',
+    '#FF99C3',
+];
+
 
 function Final(props: any) {
     const containerRef = React.useRef<HTMLDivElement>(null);
@@ -30,7 +55,7 @@ function Final(props: any) {
 
         fetch(
             "/data/all.json"
-        ).then((res) => res.json()).then(ds => {
+        ).then((res) => res.json()).then(data => {
 
             const tooltip = new Tooltip({
                 offsetX: 10,
@@ -84,7 +109,54 @@ function Final(props: any) {
                 },
             });
 
-            let data = ds
+            for(let node of data['nodes']) {
+                if(node.type === 'root') {
+                    node.style = {
+                        'fill': colors[4],
+                        'stroke': strokes[4],
+                    }
+                    node.size = 70
+                } else if(node.type === 'dataset') {
+                    node.style = {
+                        'fill': colors[0],
+                        'stroke': strokes[0],
+                    }
+                    node.size = 10
+                } else if(node.type === 'provider') {
+                    node.style = {
+                        'fill': colors[1],
+                        'stroke': strokes[1],
+                    }
+                    node.size = 20
+                } else if(node.type === 'region') {
+                    node.style = {
+                        'fill': colors[3],
+                        'stroke': strokes[3],
+                    }
+                    if (node.name === '中国') {
+                        node.size = 60
+                    } else {
+                        node.size = 40
+                    }
+                } else if(node.type === 'domain') {
+                    node.style = {
+                        'fill': colors[6],
+                        'stroke': strokes[6],
+                    }
+                    node.size = 40
+                } else if(node.type === 'category') {
+                    node.style = {
+                        'fill': colors[8],
+                        'stroke': strokes[8],
+                    }
+                    node.size = 40
+                }
+            }
+            for(let edge of data['edges']) {
+                if (edge.type === 'region-provider') {
+                    edge.value = 5
+                }
+            }
 
             graph.data({
                 nodes: data.nodes,
