@@ -116,6 +116,16 @@ function Final(props: any) {
                         'stroke': strokes[4],
                     }
                     node.size = 70
+                    if (node.name === '数据集') {
+                        node.fx = width / 6
+                        node.fy = height / 2
+                    } else if (node.name === '数据服务商') {
+                        node.fx = width / 6 * 5
+                        node.fy = height / 4
+                    } else if (node.name === '地区') {
+                        node.fx = width / 6 * 5
+                        node.fy = height / 4 * 3
+                    }
                 } else if(node.type === 'dataset') {
                     node.style = {
                         'fill': colors[0],
