@@ -109,8 +109,26 @@ function Final(props: any) {
                 },
             });
 
+            let middleCfg = {
+                style: {
+                    fontSize: 13,
+                    fill: '#3f4a5e',
+                    fontWeight: 400,
+                },
+            }
+            let largeCfg = {
+                style: {
+                    fontSize: 17,
+                    fill: '#2a313d',
+                    fontWeight: 600,
+                },
+            }
+
             for(let node of data['nodes']) {
+                node.labelCfg = middleCfg
                 if(node.type === 'root') {
+                    node.label = node.name
+                    node.labelCfg = largeCfg
                     node.style = {
                         'fill': colors[4],
                         'stroke': strokes[4],
@@ -121,10 +139,10 @@ function Final(props: any) {
                         node.fy = height / 2
                     } else if (node.name === '数据服务商') {
                         node.fx = width / 6 * 5
-                        node.fy = height / 4
+                        node.fy = height / 4 * 3
                     } else if (node.name === '地区') {
                         node.fx = width / 6 * 5
-                        node.fy = height / 4 * 3
+                        node.fy = height / 4
                     }
                 } else if(node.type === 'dataset') {
                     node.style = {
@@ -139,6 +157,12 @@ function Final(props: any) {
                     }
                     node.size = 20
                 } else if(node.type === 'region') {
+                    node.label = node.name
+                    if (node.name === '中国') {
+                        node.fx = width / 6 * 4
+                        node.fy = height / 4
+                        node.labelCfg = largeCfg
+                    }
                     node.style = {
                         'fill': colors[3],
                         'stroke': strokes[3],
@@ -149,12 +173,14 @@ function Final(props: any) {
                         node.size = 40
                     }
                 } else if(node.type === 'domain') {
+                    node.label = node.name
                     node.style = {
                         'fill': colors[6],
                         'stroke': strokes[6],
                     }
                     node.size = 40
                 } else if(node.type === 'category') {
+                    node.label = node.name
                     node.style = {
                         'fill': colors[8],
                         'stroke': strokes[8],
