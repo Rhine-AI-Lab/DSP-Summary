@@ -73,7 +73,33 @@ function Final(props: any) {
                     outDiv.style.lineHeight = '2';
                     const model = e.item.getModel();
                     if (e.item.getType() === 'node') {
-                        outDiv.innerHTML = `${model.id}`;
+                        if (model.type === 'dataset') {
+                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b>`
+                                + `<br/>来源组织: ${model.orgName}`
+                                + `<br/>地区: ${model.region}`
+                                + `<br/>行业: ${model.domain}`
+                                + `<br/>公开情况: ${model.openType}`
+                                + `<br/><br/>国家主题分类: ${model.couThemeCls}`
+                                + `<br/>部门主题分类: ${model.deptThemeCls}`
+                                + `<br/>数据标签: ${model.dataLabel}`
+                                + `<br/><br/>创建时间: ${new Date(model.createDate).toLocaleString()}`
+                                + `<br/>公开时间: ${new Date(model.openDate).toLocaleString()}`
+                                + `<br/>更新时间: ${new Date(model.updateDate).toLocaleString()}`
+                                + `<br/>更新频率: ${model.openRate}`
+                        } else if (model.type === 'provider') {
+                            let description = model.description
+                            if (description.length > 300) {
+                                description = description.substring(0, 300) + '...'
+                            }
+                            if (model.link !== 'none' && description.indexOf('网址') === -1) {
+                                description += '网址：' + model.link + '<br/>' + description
+                            }
+                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b><br/><div style="display: inline-block; max-width: 280px; overflow: hidden">${description}</div>`;
+                        } else if (model.type === 'category' || model.type === 'domain') {
+                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b><br/>子节点量: ${model.cn}`;
+                        } else {
+                            outDiv.innerHTML = `${model.id}`
+                        }
                     } else {
                         const source = e.item.getSource();
                         const target = e.item.getTarget();
@@ -139,7 +165,7 @@ function Final(props: any) {
                         node.fy = height / 2
                     } else if (node.name === '数据服务商') {
                         node.fx = width / 6 * 5
-                        node.fy = height / 4 * 3
+                        node.fy = height / 2
                     } else if (node.name === '地区') {
                         node.fx = width / 6 * 5
                         node.fy = height / 4
@@ -150,6 +176,7 @@ function Final(props: any) {
                         'stroke': strokes[0],
                     }
                     node.size = 10
+                    console.log(node)
                 } else if(node.type === 'provider') {
                     node.style = {
                         'fill': colors[1],
@@ -158,17 +185,15 @@ function Final(props: any) {
                     node.size = 20
                 } else if(node.type === 'region') {
                     node.label = node.name
-                    if (node.name === '中国') {
-                        node.fx = width / 6 * 4
-                        node.fy = height / 4
-                        node.labelCfg = largeCfg
-                    }
                     node.style = {
                         'fill': colors[3],
                         'stroke': strokes[3],
                     }
                     if (node.name === '中国') {
-                        node.size = 60
+                        node.fx = width / 6 * 4
+                        node.fy = height / 4
+                        node.labelCfg = largeCfg
+                        node.size = 65
                     } else {
                         node.size = 40
                     }
