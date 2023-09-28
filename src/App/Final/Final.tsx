@@ -4,6 +4,7 @@ import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
 import {Graph, Item, Tooltip, TreeGraph} from "@antv/g6";
 import {NodeConfig} from "@antv/g6-core/lib/types";
+import {Autocomplete, Chip, TextField} from "@mui/material";
 
 let SHOW_COMPONENT_EFFECT_TIMES = 0
 
@@ -78,7 +79,8 @@ function Final(props: any) {
                                 + `<br/>来源组织: ${model.orgName}`
                                 + `<br/>地区: ${model.region}`
                                 + `<br/>行业: ${model.domain}`
-                                + `<br/>公开情况: ${model.openType}`
+                                + `<br/>公开条件: ${model.openType}`
+                                + `<br/>公开形式: ${model.openResType}`
                                 + `<br/><br/>国家主题分类: ${model.couThemeCls}`
                                 + `<br/>部门主题分类: ${model.deptThemeCls}`
                                 + `<br/>数据标签: ${model.dataLabel}`
@@ -254,11 +256,50 @@ function Final(props: any) {
 
     }, []);
 
+    const top100Films = [
+        { title: '地域: 上海市', type: 'REGI0N' },
+        { title: '地域: 杨浦区', type: 'REGI0N' },
+        { title: '地域: 闵行区', type: 'REGI0N' },
+        { title: '领域: 公共安全', type: 'DOMAIN' },
+        { title: '领域: 经济建设', type: 'DOMAIN' },
+        { title: '领域: 教育科技', type: 'DOMAIN' },
+        { title: '平台: 公共数据开放平台', type: 'CATEGORY' },
+        { title: '平台: 行业数据交易所', type: 'CATEGORY' },
+    ]
+
   return (
     <div className={Style.Final}>
       <div className={Style.holder}>
           <div className={Style.container} ref={containerRef}></div>
       </div>
+        <div className={Style.filter}>
+            <Autocomplete
+                multiple
+                id="filter-input"
+                sx={{minWidth: 280}}
+                options={top100Films}
+                getOptionLabel={(option) => option.title}
+                defaultValue={[]}
+                renderTags={(value, getTagProps) =>
+                    value.map((option, index) => (
+                        <Chip
+                            variant="outlined"
+                            label={option.title}
+                            size="small"
+                            {...getTagProps({ index })}
+                        />
+                    ))
+                }
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        variant="filled"
+                        label="Filter"
+                        placeholder="添加过滤条件..."
+                    />
+                )}
+            />
+        </div>
     </div>
   )
 }

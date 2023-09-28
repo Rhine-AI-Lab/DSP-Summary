@@ -17,4 +17,13 @@ $padding: 3px;
       height: 100%;
     }
   }
+
+  .filter {
+    position: absolute;
+    top:   30px;
+    right: 30px;
+    padding: 40px;
+    border-radius: 40px;
+    background: #ffffffcc;
+  }
 }
