@@ -4,6 +4,7 @@ import {Route, Routes} from "react-router-dom";
 import Home from "./Home/Home";
 import Show from "./Show/Show";
 import Final from "./Final/Final";
+import Data231101 from "./Data231101/Data231101";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Routes>
         <Route path="/circle" element={<Show/>} />
         <Route path="/tree" element={<Show tree={true}/>} />
-        <Route path="/" element={<Final/>} />
+        <Route path="/last" element={<Final/>} />
+        <Route path="/" element={<Data231101/>} />
       </Routes>
     </div>
   )
