@@ -129,20 +129,20 @@ function Data231101(props: any) {
                     type: 'force',
                 },
                 defaultNode: {
-                    size: 15,
+                    size: 55,
                 },
             });
 
             let middleCfg = {
                 style: {
-                    fontSize: 12,
+                    fontSize: 6,
                     fill: '#3f4a5e',
                     fontWeight: 400,
                 },
             }
             let largeCfg = {
                 style: {
-                    fontSize: 17,
+                    fontSize: 7,
                     fill: '#2a313d',
                     fontWeight: 600,
                 },
@@ -160,25 +160,24 @@ function Data231101(props: any) {
                         'fill': colors[1],
                         'stroke': strokes[1],
                     }
-                    node.size = 60
+                    node.size = 30
                 } else if(node.type === 'product') {
                     node.style = {
                         'fill': colors[0],
                         'stroke': strokes[0],
                     }
-                    node.size = 62
+                    node.size = 32
                 } else {
                     node.style = {
                         'fill': colors[4],
                         'stroke': strokes[4],
                     }
-                    node.size = 66
+                    node.size = 36
                 }
+
             }
+
             for(let edge of data['edges']) {
-                if (edge.type === 'region-provider') {
-                    edge.value = 5
-                }
             }
 
             graph.data({
@@ -216,16 +215,16 @@ function Data231101(props: any) {
 
     }, []);
 
-    const top100Films = [
-        { title: '地域: 上海市', type: 'REGI0N' },
-        { title: '地域: 杨浦区', type: 'REGI0N' },
-        { title: '地域: 闵行区', type: 'REGI0N' },
-        { title: '领域: 公共安全', type: 'DOMAIN' },
-        { title: '领域: 经济建设', type: 'DOMAIN' },
-        { title: '领域: 教育科技', type: 'DOMAIN' },
-        { title: '平台: 公共数据开放平台', type: 'CATEGORY' },
-        { title: '平台: 行业数据交易所', type: 'CATEGORY' },
-    ]
+    // const top100Films = [
+    //     { title: '地域: 上海市', type: 'REGI0N' },
+    //     { title: '地域: 杨浦区', type: 'REGI0N' },
+    //     { title: '地域: 闵行区', type: 'REGI0N' },
+    //     { title: '领域: 公共安全', type: 'DOMAIN' },
+    //     { title: '领域: 经济建设', type: 'DOMAIN' },
+    //     { title: '领域: 教育科技', type: 'DOMAIN' },
+    //     { title: '平台: 公共数据开放平台', type: 'CATEGORY' },
+    //     { title: '平台: 行业数据交易所', type: 'CATEGORY' },
+    // ]
 
   return (
     <div className={Style.Final}>
@@ -233,32 +232,32 @@ function Data231101(props: any) {
           <div className={Style.container} ref={containerRef}></div>
       </div>
         <div className={Style.filter} style={{display: 'none'}}>
-            <Autocomplete
-                multiple
-                id="filter-input"
-                sx={{minWidth: 280}}
-                options={top100Films}
-                getOptionLabel={(option) => option.title}
-                defaultValue={[]}
-                renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                        <Chip
-                            variant="outlined"
-                            label={option.title}
-                            size="small"
-                            {...getTagProps({ index })}
-                        />
-                    ))
-                }
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        variant="filled"
-                        label="Filter"
-                        placeholder="添加过滤条件..."
-                    />
-                )}
-            />
+            {/*<Autocomplete*/}
+            {/*    multiple*/}
+            {/*    id="filter-input"*/}
+            {/*    sx={{minWidth: 280}}*/}
+            {/*    options={top100Films}*/}
+            {/*    getOptionLabel={(option) => option.title}*/}
+            {/*    defaultValue={[]}*/}
+            {/*    renderTags={(value, getTagProps) =>*/}
+            {/*        value.map((option, index) => (*/}
+            {/*            <Chip*/}
+            {/*                variant="outlined"*/}
+            {/*                label={option.title}*/}
+            {/*                size="small"*/}
+            {/*                {...getTagProps({ index })}*/}
+            {/*            />*/}
+            {/*        ))*/}
+            {/*    }*/}
+            {/*    renderInput={(params) => (*/}
+            {/*        <TextField*/}
+            {/*            {...params}*/}
+            {/*            variant="filled"*/}
+            {/*            label="Filter"*/}
+            {/*            placeholder="添加过滤条件..."*/}
+            {/*        />*/}
+            {/*    )}*/}
+            {/*/>*/}
         </div>
     </div>
   )
