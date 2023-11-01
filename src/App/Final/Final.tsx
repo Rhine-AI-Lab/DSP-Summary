@@ -75,8 +75,8 @@ function Final(props: any) {
                     const model = e.item.getModel();
                     if (e.item.getType() === 'node') {
                         if (model.type === 'dataset') {
-                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b>`
-                                + `<br/>来源组织: ${model.orgName}`
+                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.id}</b>`
+                                + `<br/>ID: ${model.company_id}`
                                 + `<br/>地区: ${model.region}`
                                 + `<br/>行业: ${model.domain}`
                                 + `<br/>公开条件: ${model.openType}`
@@ -88,17 +88,6 @@ function Final(props: any) {
                                 + `<br/>公开时间: ${new Date(model.openDate).toLocaleString()}`
                                 + `<br/>更新时间: ${new Date(model.updateDate).toLocaleString()}`
                                 + `<br/>更新频率: ${model.openRate}`
-                        } else if (model.type === 'provider') {
-                            let description = model.description
-                            if (description.length > 300) {
-                                description = description.substring(0, 300) + '...'
-                            }
-                            if (model.link !== 'none' && description.indexOf('网址') === -1) {
-                                description += '网址：' + model.link + '<br/>' + description
-                            }
-                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b><br/><div style="display: inline-block; max-width: 280px; overflow: hidden">${description}</div>`;
-                        } else if (model.type === 'category' || model.type === 'domain') {
-                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b><br/>子节点量: ${model.cn}`;
                         } else {
                             outDiv.innerHTML = `${model.id}`
                         }

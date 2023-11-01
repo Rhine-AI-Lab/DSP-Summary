@@ -73,33 +73,30 @@ function Data231101(props: any) {
                     outDiv.style.lineHeight = '2';
                     const model = e.item.getModel();
                     if (e.item.getType() === 'node') {
-                        if (model.type === 'dataset') {
-                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b>`
-                                + `<br/>来源组织: ${model.orgName}`
-                                + `<br/>地区: ${model.region}`
-                                + `<br/>行业: ${model.domain}`
-                                + `<br/>公开条件: ${model.openType}`
-                                + `<br/>公开形式: ${model.openResType}`
-                                + `<br/><br/>国家主题分类: ${model.couThemeCls}`
-                                + `<br/>部门主题分类: ${model.deptThemeCls}`
-                                + `<br/>数据标签: ${model.dataLabel}`
-                                + `<br/><br/>创建时间: ${new Date(model.createDate).toLocaleString()}`
-                                + `<br/>公开时间: ${new Date(model.openDate).toLocaleString()}`
-                                + `<br/>更新时间: ${new Date(model.updateDate).toLocaleString()}`
-                                + `<br/>更新频率: ${model.openRate}`
-                        } else if (model.type === 'provider') {
-                            let description = model.description
-                            if (description.length > 300) {
-                                description = description.substring(0, 300) + '...'
+                        if (e.item.getType() === 'node') {
+                            if (model.type === 'company') {
+                                outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.id}</b>`
+                                if (model.create_date && model.create_date.length > 0) {
+                                    outDiv.innerHTML += `<br/>成立日期: ${model.create_date}`
+                                }
+                                if (model.company_id && model.company_id.length > 0) {
+                                    outDiv.innerHTML += `<br/>ID: ${model.company_id}`
+                                }
+                            } else if (model.type === 'product') {
+                                outDiv.innerHTML = `<b style="font-weight: 600; font-size: 15px">${model.id}</b>`
+                                if (model.business && model.business.length > 0) {
+                                    outDiv.innerHTML += `<br/>业务: ${model.business}`
+                                }
+                                if (model.intoduction && model.intoduction.length > 0) {
+                                    outDiv.innerHTML += `<br/>简介: ${model.intoduction}`
+                                }
+                            } else {
+                                outDiv.innerHTML = `${model.id}`
                             }
-                            if (model.link !== 'none' && description.indexOf('网址') === -1) {
-                                description += '网址：' + model.link + '<br/>' + description
-                            }
-                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b><br/><div style="display: inline-block; max-width: 280px; overflow: hidden">${description}</div>`;
-                        } else if (model.type === 'category' || model.type === 'domain') {
-                            outDiv.innerHTML = `<b style="font-weight: 600; font-size: 17px">${model.name}</b><br/>子节点量: ${model.cn}`;
                         } else {
-                            outDiv.innerHTML = `${model.id}`
+                            const source = e.item.getSource();
+                            const target = e.item.getTarget();
+                            outDiv.innerHTML = `From：${source.getModel().id}<br/>To：${target.getModel().id}`;
                         }
                     } else {
                         const source = e.item.getSource();
